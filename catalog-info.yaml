@@ -1,0 +1,66 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: thisisaverylongusernametest-poi-backend-app-dev
+  annotations:
+    argocd/app-name: thisisaverylongusernametest-poi-backend-app-dev
+    backstage.io/kubernetes-id: thisisaverylongusernametest-poi-backend-app
+    backstage.io/kubernetes-namespace: thisisaverylongusernametest
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-ms/thisisaverylongusernametest-backend
+    janus-idp.io/tekton-enabled: 'true'
+  tags:
+    - java
+    - quarkus
+    - maven
+    - workshop
+  links:
+    - url: https://console-openshift-console.apps.igb2792k.eastus2.aroapp.io/dev-pipelines/ns/thisisaverylongusernametest/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.igb2792k.eastus2.aroapp.io/k8s/ns/thisisaverylongusernametest/deployments/thisisaverylongusernametest-poi-backend-app
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.igb2792k.eastus2.aroapp.io/#https://github.com/rhdh-ms/thisisaverylongusernametest-backend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/ thisisaverylongusernametest"
+  system: workshop-system-thisisaverylongusernametest
+  providesApis:
+    - backend-api-thisisaverylongusernametest
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-thisisaverylongusernametest
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: "user:default/ thisisaverylongusernametest"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: backend-api-thisisaverylongusernametest
+  description: API surface used by workshop attendees to initialize and load parks data
+  links:
+    - url: http://thisisaverylongusernametest-poi-backend-app-thisisaverylongusernametest.apps.igb2792k.eastus2.aroapp.io/q/swagger-ui
+      title: Swagger UI
+      icon: web
+    - url: https://github.com/rhdh-ms/thisisaverylongusernametest-backend/tree/main/src/main/resources/META-INF/openapi.yaml
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user:default/ thisisaverylongusernametest"
+  system: workshop-system-thisisaverylongusernametest
+  definition:
+    $text: https://github.com/rhdh-ms/thisisaverylongusernametest-backend/tree/main/src/main/resources/META-INF/openapi.yaml
